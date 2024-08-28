@@ -6,7 +6,15 @@ import { Badge, Title, Text } from 'rizzui';
 import Table from '@/app/shared/table';
 import { siteConfig } from '@/config/site.config';
 
-const invoiceItems = [
+const URL = "https://nestjs-mongodb-tau.vercel.app/invoices/66cc4287b2340e3101ad03f6";
+
+const getInvoice = async () => {
+  return await fetch(URL, { cache: 'no-store' })
+    .then((res) => res.json())
+    .catch((err) => "error");
+};
+
+const invoiceItems1 = [
   {
     id: '1',
     product: {
@@ -92,9 +100,11 @@ const columns = [
 ];
 
 function InvoiceDetailsListTable() {
+  const invoiceItems = getInvoice();
+  console.log("invoiceItems:" + invoiceItems);
   return (
     <Table
-      data={invoiceItems}
+      data={invoiceItems1}
       columns={columns}
       variant="minimal"
       rowKey={(record) => record.id}
