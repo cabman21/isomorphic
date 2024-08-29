@@ -24,14 +24,23 @@ const pageHeader = {
   ],
 };
 
-export default function CategoriesPage() {
+const URL = "https://nestjs-mongodb-tau.vercel.app/categories";
+
+const getCategories = async () => {
+  return await fetch(URL, { cache: 'no-store' })
+    .then((res) => res.json())
+    .catch((err) => "error");
+};
+
+export default async function CategoriesPage() {
+  const categoryData = await getCategories();
   return (
     <>
       <CategoryPageHeader
         title={pageHeader.title}
         breadcrumb={pageHeader.breadcrumb}
       />
-      <CategoryTable />
+      <CategoryTable data={categoryData} />
     </>
   );
 }

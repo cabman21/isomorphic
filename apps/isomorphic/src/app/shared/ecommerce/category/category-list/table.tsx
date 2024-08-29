@@ -13,7 +13,7 @@ const TableFooter = dynamic(
   { ssr: false }
 );
 
-export default function CategoryTable() {
+export default function CategoryTable({ data = [] }: { data: any[] }) {
   const [pageSize, setPageSize] = useState(10);
 
   const onHeaderCellClick = (value: string) => ({
@@ -51,7 +51,7 @@ export default function CategoryTable() {
     sortConfig,
     handleSort,
     handleDelete,
-  } = useTable(categories, pageSize);
+  } = useTable(data, pageSize);
 
   const columns = useMemo(
     () =>
