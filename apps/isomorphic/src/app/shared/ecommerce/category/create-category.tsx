@@ -115,9 +115,18 @@ export default function CreateCategory({
   const onSubmit: SubmitHandler<CategoryFormInput> = (data) => {
     // set timeout ony required to display loading state of the create category button
     setLoading(true);
-    setTimeout(() => {
+    console.log('createCategory data ->', JSON.stringify(data));
+    fetch('http://localhost:8080/categories', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      console.log(res);
       setLoading(false);
-      console.log('createCategory data ->', data);
       setReset({
         name: '',
         slug: '',
@@ -126,7 +135,7 @@ export default function CreateCategory({
         description: '',
         images: '',
       });
-    }, 600);
+    });
   };
 
   return (
@@ -145,9 +154,9 @@ export default function CreateCategory({
           <div className="flex-grow pb-10">
             <div
               className={cn(
-                'grid grid-cols-1 ',
+                'grid grid-cols-1',
                 isModalView
-                  ? 'grid grid-cols-1 gap-8 divide-y divide-dashed  divide-gray-200 @2xl:gap-10 @3xl:gap-12 [&>div]:pt-7 first:[&>div]:pt-0 @2xl:[&>div]:pt-9 @3xl:[&>div]:pt-11'
+                  ? 'grid grid-cols-1 gap-8 divide-y divide-dashed divide-gray-200 @2xl:gap-10 @3xl:gap-12 [&>div]:pt-7 first:[&>div]:pt-0 @2xl:[&>div]:pt-9 @3xl:[&>div]:pt-11'
                   : 'gap-5'
               )}
             >
