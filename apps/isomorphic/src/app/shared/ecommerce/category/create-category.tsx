@@ -116,26 +116,52 @@ export default function CreateCategory({
     // set timeout ony required to display loading state of the create category button
     setLoading(true);
     console.log('createCategory data ->', JSON.stringify(data));
-    fetch('http://localhost:8080/categories', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }).then((res) => {
-      console.log(res);
-      setLoading(false);
-      setReset({
-        name: '',
-        slug: '',
-        type: '',
-        parentCategory: '',
-        description: '',
-        images: '',
-      });
-    });
+
+    if (true) {
+      fetch('http://localhost:8080/categories/66d17c567247d5d088b92f73', {
+        method: 'PUT',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => {
+          console.log(res);
+          setLoading(false);
+          // Redirect
+        })
+        .catch((error) => {
+          console.log('error:', error);
+        });
+    } else {
+      fetch('http://localhost:8080/categories', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => {
+          console.log(res);
+          setLoading(false);
+          setReset({
+            name: '',
+            slug: '',
+            type: '',
+            parentCategory: '',
+            description: '',
+            images: '',
+          });
+          // Redirect
+        })
+        .catch((error) => {
+          console.log('error:', error);
+        });
+    }
   };
 
   return (

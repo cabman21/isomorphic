@@ -39,7 +39,7 @@ const pageHeader = {
   ],
 };
 
-const categoryData = {
+const categoryData1 = {
   name: 'Vegetables',
   slug: 'vegetables',
   type: 'Diet Foods',
@@ -48,7 +48,16 @@ const categoryData = {
   images: undefined,
 };
 
-export default function EditCategoryPage({ params }: any) {
+const URL = "http://localhost:8080/categories/66d17c567247d5d088b92f73";
+
+const getCategories = async () => {
+  return await fetch(URL, { cache: 'no-store' })
+    .then((res) => res.json())
+    .catch((err) => "error");
+};
+
+export default async function EditCategoryPage({ params }: any) {
+  const categoryData = await getCategories();
   return (
     <>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
