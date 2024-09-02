@@ -6,6 +6,8 @@ import { Button, Title, ActionIcon } from 'rizzui';
 import CreateCategory from '@/app/shared/ecommerce/category/create-category';
 import { PiPlusBold, PiXBold } from 'react-icons/pi';
 import { useModal } from '@/app/shared/modal-views/use-modal';
+import { routes } from '@/config/routes';
+import { useRouter } from 'next/navigation';
 
 function CreateCategoryModalView() {
   const { closeModal } = useModal();
@@ -36,17 +38,16 @@ export default function CategoryPageHeader({
   className,
 }: PageHeaderTypes) {
   const { openModal } = useModal();
+  const router = useRouter();
   return (
     <>
       <PageHeader title={title} breadcrumb={breadcrumb} className={className}>
         <Button
           as="span"
           className="mt-4 w-full cursor-pointer @lg:mt-0 @lg:w-auto "
-          onClick={() =>
-            openModal({
-              view: <CreateCategoryModalView />,
-              customSize: '720px',
-            })
+          onClick={() => {
+            router.push(routes.eCommerce.createCategory);
+          }
           }
         >
           <PiPlusBold className="me-1 h-4 w-4" />

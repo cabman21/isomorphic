@@ -13,6 +13,9 @@ import {
   categoryFormSchema,
 } from '@/validators/create-category.schema';
 import UploadZone from '@ui/file-upload/upload-zone';
+import { useRouter } from 'next/navigation';
+import { routes } from '@/config/routes';
+
 const Select = dynamic(() => import('rizzui').then((mod) => mod.Select), {
   ssr: false,
   loading: () => <SelectLoader />,
@@ -111,6 +114,7 @@ export default function CreateCategory({
 }) {
   const [reset, setReset] = useState({});
   const [isLoading, setLoading] = useState(false);
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<CategoryFormInput> = (data) => {
     // set timeout ony required to display loading state of the create category button
@@ -130,7 +134,7 @@ export default function CreateCategory({
         .then((res) => {
           console.log(res);
           setLoading(false);
-          // Redirect
+          router.push(routes.eCommerce.categories);
         })
         .catch((error) => {
           console.log('error:', error);
@@ -156,7 +160,7 @@ export default function CreateCategory({
             description: '',
             images: '',
           });
-          // Redirect
+          router.push(routes.eCommerce.categories);
         })
         .catch((error) => {
           console.log('error:', error);

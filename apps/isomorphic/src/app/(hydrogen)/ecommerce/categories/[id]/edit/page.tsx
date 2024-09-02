@@ -59,6 +59,7 @@ const getCategories = async (params: any) => {
 
 export default async function EditCategoryPage({ params }: any) {
   const categoryData = await getCategories(params);
+  console.debug("findOne category =>", categoryData);
   return (
     <>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
