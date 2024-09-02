@@ -22,7 +22,24 @@ export default function CategoryTable({ data = [] }: { data: any[] }) {
     },
   });
 
+  const URL = "http://localhost:8080/categories/";
+
+  const deleteCategory = async (id: string) => {
+    console.debug("delete category id =>", id);
+    return await fetch(URL + id, {
+      method: 'DELETE',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store' })
+      .then((res) => res.json())
+      .catch((err) => "error");
+  };
+
   const onDeleteItem = useCallback((id: string) => {
+    deleteCategory(id);
     handleDelete(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
