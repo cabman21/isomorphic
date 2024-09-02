@@ -9,7 +9,7 @@ import { Person, defaultData } from '@/data/tan-table-data';
 import TablePagination from '@/app/shared/table/table-pagination';
 import { useTanStackTable } from '@/app/shared/tan-table/custom-table-components/use-TanStack-Table';
 
-const URL = "https://nestjs-mongodb-tau.vercel.app/persons";
+const URL = "https://nestjs-mongodb-tau.vercel.app/people";
 
 const getPeople = async () => {
   return await fetch(URL, { cache: 'no-store' })
