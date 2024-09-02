@@ -24,7 +24,7 @@ const pageHeader = {
   ],
 };
 
-const URL = "https://nestjs-mongodb-tau.vercel.app/categories";
+const URL = "http://localhost:8080/categories";
 
 const getCategories = async () => {
   return await fetch(URL, { cache: 'no-store' })
@@ -34,6 +34,7 @@ const getCategories = async () => {
 
 export default async function CategoriesPage() {
   const categoryData = await getCategories();
+  console.debug('categoryData =>', categoryData);
   return (
     <>
       <CategoryPageHeader

@@ -117,8 +117,8 @@ export default function CreateCategory({
     setLoading(true);
     console.log('createCategory data ->', JSON.stringify(data));
 
-    if (true) {
-      fetch('http://localhost:8080/categories/66d17c567247d5d088b92f73', {
+    if (id) {
+      fetch('http://localhost:8080/categories/' + id, {
         method: 'PUT',
         mode: 'cors',
         headers: {

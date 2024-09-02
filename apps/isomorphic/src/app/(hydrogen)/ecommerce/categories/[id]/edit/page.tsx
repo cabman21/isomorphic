@@ -48,16 +48,17 @@ const categoryData1 = {
   images: undefined,
 };
 
-const URL = "http://localhost:8080/categories/66d17c567247d5d088b92f73";
+const URL = "http://localhost:8080/categories/";
 
-const getCategories = async () => {
-  return await fetch(URL, { cache: 'no-store' })
+const getCategories = async (params: any) => {
+  console.debug("params.id =>", params.id);
+  return await fetch(URL + params.id, { cache: 'no-store' })
     .then((res) => res.json())
     .catch((err) => "error");
 };
 
 export default async function EditCategoryPage({ params }: any) {
-  const categoryData = await getCategories();
+  const categoryData = await getCategories(params);
   return (
     <>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
